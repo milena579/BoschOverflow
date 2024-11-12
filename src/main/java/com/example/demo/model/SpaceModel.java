@@ -14,33 +14,44 @@ public class SpaceModel {
     @Id 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    
     @Column
     private String name;
-
+    
     @OneToMany(mappedBy = "space")
     private List<PermissionModel> Permissions;
-
+    
+    
+    @OneToMany(mappedBy = "space")
+    private List<QuestionsModel> Questions;
+    
+    
     public Long getId() {
         return id;
     }
-
+    
     public String getName() {
         return name;
     }
-
+    
     public void setName(String name) {
         this.name = name;
     }
     
-    @OneToMany(mappedBy = "space")
-    private List<QuestionsModel> requests;
-
-    public List<QuestionsModel> getRequests() {
-        return requests;
+    
+    public List<QuestionsModel> getQuestions() {
+        return Questions;
+    }
+    
+    public void setQuestions(List<QuestionsModel> Questions) {
+        this.Questions = Questions;
     }
 
-    public void setRequests(List<QuestionsModel> requests) {
-        this.requests = requests;
+    public List<PermissionModel> getPermissions() {
+        return Permissions;
+    }
+    
+    public void setPermissions(List<PermissionModel> permissions) {
+        Permissions = permissions;
     }
 }

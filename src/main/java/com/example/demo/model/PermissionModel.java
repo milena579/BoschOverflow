@@ -26,4 +26,36 @@ public class PermissionModel {
 
     @Column
     private int permission;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public UserModel getUser() {
+        return user;
+    }
+
+    public void setUser(UserModel user) {
+        this.user = user;
+    }
+
+    public SpaceModel getSpace() {
+        return space;
+    }
+
+    public void setSpace(SpaceModel space) {
+        this.space = space;
+    }
+
+    public int getPermission() {
+        return permission;
+    }
+
+    public void setPermission(int permission) {
+        this.permission = permission;
+    }
 }

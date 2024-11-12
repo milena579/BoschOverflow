@@ -31,6 +31,20 @@ public class UserModel {
     @OneToMany(mappedBy = "user")
     private List<PermissionModel> Permissions;
 
+    @OneToMany(mappedBy = "user")
+    private List<QuestionsModel> Questions;
+
+    @OneToMany(mappedBy = "user")
+    private List<AnswerModel> Answer;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public Long getEdv() {
         return edv;
     }
@@ -63,7 +77,29 @@ public class UserModel {
         this.password = password;
     }
 
-    public Long getId() {
-        return id;
-    }  
+    public List<PermissionModel> getPermissions() {
+        return Permissions;
+    }
+
+    public void setPermissions(List<PermissionModel> permissions) {
+        Permissions = permissions;
+    }
+
+    public List<QuestionsModel> getQuestions() {
+        return Questions;
+    }
+
+    public void setQuestions(List<QuestionsModel> questions) {
+        Questions = questions;
+    }
+
+    public List<AnswerModel> getAnswer() {
+        return Answer;
+    }
+
+    public void setAnswer(List<AnswerModel> answer) {
+        Answer = answer;
+    }
+
+
 }

@@ -1,33 +1,29 @@
 package com.example.demo.model;
 
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 
 @Entity
-public class QuestionsModel {
-    
-    @Id
+public class AnswerModel {
+    @Id 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column
-    private String title;
-
-    @Column 
     private String text;
+
+    @ManyToOne
+    @JoinColumn(name = "questionId")
+    private QuestionsModel question;
 
     @ManyToOne
     @JoinColumn(name = "userId")
     private UserModel user;
-
-    @ManyToOne
-    @JoinColumn(name = "spaceId")
-    private SpaceModel space;
 
     public Long getId() {
         return id;
@@ -35,14 +31,6 @@ public class QuestionsModel {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public String getText() {
@@ -53,6 +41,14 @@ public class QuestionsModel {
         this.text = text;
     }
 
+    public QuestionsModel getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(QuestionsModel question) {
+        this.question = question;
+    }
+
     public UserModel getUser() {
         return user;
     }
@@ -61,11 +57,5 @@ public class QuestionsModel {
         this.user = user;
     }
 
-    public SpaceModel getSpace() {
-        return space;
-    }
 
-    public void setSpace(SpaceModel space) {
-        this.space = space;
-    }
 }
