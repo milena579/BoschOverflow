@@ -18,6 +18,9 @@ public class SpaceModel {
     @Column
     private String name;
 
+    @OneToMany(mappedBy = "space")
+    private List<PermissionModel> Permissions;
+
     public Long getId() {
         return id;
     }
