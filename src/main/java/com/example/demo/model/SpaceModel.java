@@ -23,7 +23,7 @@ public class SpaceModel {
     
     
     @OneToMany(mappedBy = "space")
-    private List<QuestionsModel> Questions;
+    private List<QuestionModel> Questions;
     
     
     public Long getId() {
@@ -39,11 +39,11 @@ public class SpaceModel {
     }
     
     
-    public List<QuestionsModel> getQuestions() {
+    public List<QuestionModel> getQuestions() {
         return Questions;
     }
     
-    public void setQuestions(List<QuestionsModel> Questions) {
+    public void setQuestions(List<QuestionModel> Questions) {
         this.Questions = Questions;
     }
 

@@ -19,7 +19,7 @@ public class AnswerModel {
 
     @ManyToOne
     @JoinColumn(name = "questionId")
-    private QuestionsModel question;
+    private QuestionModel question;
 
     @ManyToOne
     @JoinColumn(name = "userId")
@@ -41,11 +41,11 @@ public class AnswerModel {
         this.text = text;
     }
 
-    public QuestionsModel getQuestion() {
+    public QuestionModel getQuestion() {
         return question;
     }
 
-    public void setQuestion(QuestionsModel question) {
+    public void setQuestion(QuestionModel question) {
         this.question = question;
     }
 

@@ -32,7 +32,7 @@ public class UserModel {
     private List<PermissionModel> Permissions;
 
     @OneToMany(mappedBy = "user")
-    private List<QuestionsModel> Questions;
+    private List<QuestionModel> Questions;
 
     @OneToMany(mappedBy = "user")
     private List<AnswerModel> Answer;
@@ -85,11 +85,11 @@ public class UserModel {
         Permissions = permissions;
     }
 
-    public List<QuestionsModel> getQuestions() {
+    public List<QuestionModel> getQuestions() {
         return Questions;
     }
 
-    public void setQuestions(List<QuestionsModel> questions) {
+    public void setQuestions(List<QuestionModel> questions) {
         Questions = questions;
     }
 
