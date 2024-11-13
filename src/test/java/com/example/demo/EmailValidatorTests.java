@@ -1,42 +1,49 @@
 package com.example.demo;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import com.example.demo.services.UserService;
+
 
 @SpringBootTest
 public class EmailValidatorTests {
     
-    // private final EmailValidator validator = new EmailValidator();
+    @Autowired 
+    UserService service;
+    
 
     @Test
     void validateNoDotCom() {
-        assertEquals(validator.validate("email@email"), false);
-        assertEquals(validator.validate("a@a"), false);
-        assertEquals(validator.validate("email@a."), false);
-        assertEquals(validator.validate("email@mail.com."), false);
-        assertEquals(validator.validate("juninho@escola.pr.gov."), false);
+        assertEquals(service.validateEmail("email@email"), false);
+        assertEquals(service.validateEmail("a@a"), false);
+        assertEquals(service.validateEmail("email@a."), false);
+        assertEquals(service.validateEmail("email@mail.com."), false);
+        assertEquals(service.validateEmail("juninho@escola.pr.gov."), false);
     }
     
     @Test
     void validateNoAt() {
-        assertEquals(validator.validate("email.com"), false);
-        assertEquals(validator.validate("juninhoescola.pr.gov.br"), false);
-        assertEquals(validator.validate("email@"), false);
-        assertEquals(validator.validate("email@.com"), false);
-        assertEquals(validator.validate("email.@mail.com"), false);
-        assertEquals(validator.validate("email@mail@mail.com"), false);
+        assertEquals(service.validateEmail("email.com"), false);
+        assertEquals(service.validateEmail("juninhoescola.pr.gov.br"), false);
+        assertEquals(service.validateEmail("email@"), false);
+        assertEquals(service.validateEmail("email@.com"), false);
+        assertEquals(service.validateEmail("email.@mail.com"), false);
+        assertEquals(service.validateEmail("email@mail@mail.com"), false);
     }
 
     @Test
     void validateNoEmail() {
-        assertEquals(validator.validate("@mail.com"), false);
-        assertEquals(validator.validate("@juninhoescola.pr.gov.br"), false);
+        assertEquals(service.validateEmail("@mail.com"), false);
+        assertEquals(service.validateEmail("@juninhoescola.pr.gov.br"), false);
     }
     
     @Test
     void validateEmail() {
-        assertEquals(validator.validate("email@mail.com"), true);
-        assertEquals(validator.validate("a@a.a"), true);
-        assertEquals(validator.validate("juninho@escola.pr.gov.br"), true);
+        assertEquals(service.validateEmail("email@mail.com"), true);
+        assertEquals(service.validateEmail("a@a.a"), true);
+        assertEquals(service.validateEmail("juninho@escola.pr.gov.br"), true);
     }
 }

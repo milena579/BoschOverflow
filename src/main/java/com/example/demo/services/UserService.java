@@ -7,7 +7,6 @@ import com.example.demo.model.UserModel;
 public interface UserService {
     UserModel Login(UserLoginData data);
     String Register(UserData data);
-    Boolean validateName(String name);
     Boolean validateEmail(String email);
     Boolean validatePassword(String password);
 }
