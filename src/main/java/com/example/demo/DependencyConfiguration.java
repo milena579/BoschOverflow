@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 
+import com.example.demo.implementations.DefUserService;
 import com.example.demo.services.*;
 
 @Configuration
@@ -13,7 +14,7 @@ public class DependencyConfiguration
     @Scope("singleton")
     public UserService userService()
     {
-        return null;
+        return new DefUserService();
     }
 
     @Bean
