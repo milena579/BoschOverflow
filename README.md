@@ -27,6 +27,14 @@ Vai pesquisar no banco de dados, configurado posteriormente, as funções do JPA
 ### DTOS
 Nos DTOS, se tem os dados que serão requisitados para retorno ou como parametro, que posteriormente será configurado em cada endpoint ou service, para o devido funcionamento do sistema
 
+### Testes
+A parte de teste irá posteriormente ser usada para corrigir possiveis erros das funções, e conferir o pleno funcionamento do sistema, sem bugs que possam passar despercebidos. Ele contem testes que serão realizados nos seguintes campos:
+
+ * Email
+    * #### Vai testar se tem @, se tem caracteres antes e depois do @ e se ha . depois do @ indicando TLD no email
+ * Senha
+    * #### Vai testar se possui os caracteres requisitados pelo sistema, se possui Maiusculas e Minusculas, e se possui numeros
+
 
 
 
