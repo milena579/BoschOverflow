@@ -46,4 +46,11 @@ public class EmailValidatorTests {
         assertEquals(service.validateEmail("a@a.a"), true);
         assertEquals(service.validateEmail("juninho@escola.pr.gov.br"), true);
     }
+    
+    @Test
+    void validateWrongOrderEmail() {
+        assertEquals(validator.validate("email.mail@com"), false);
+        assertEquals(validator.validate("email.mail.com@br"), false);
+        assertEquals(validator.validate("juninho@escola.pr.gov@br"), false);
+    }
 }
