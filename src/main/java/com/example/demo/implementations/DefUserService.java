@@ -85,10 +85,18 @@ public class DefUserService implements UserService
     @Override
     public Boolean validateEmail(String email)
     {
+        List<User> users = UserRep.findAll();
+
         int at = email.indexOf("@");
 
         if (at > 0 && at != email.length-1) {
-            return true
+            for (int i = 0; i < users.size(); i++) {
+                if (users.get(i).email.contentEquals(email)) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
         } else {
             return false
         }
