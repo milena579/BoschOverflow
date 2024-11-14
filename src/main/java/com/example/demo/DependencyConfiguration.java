@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 
+import com.example.demo.implementations.DefAnswerService;
 import com.example.demo.implementations.DefUserService;
 import com.example.demo.services.*;
 
@@ -35,6 +36,6 @@ public class DependencyConfiguration
     @Scope("singleton")
     public AnswerService answerService()
     {
-        return null;
+        return new DefAnswerService();
     }
 }
