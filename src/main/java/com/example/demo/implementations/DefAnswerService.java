@@ -44,12 +44,37 @@ public class DefAnswerService implements AnswerService
     @Override
     public String deleteAnswer(Long answerId)
     {
-
+        AnswerRep.deleteById(answerId);
+        return "Deletado";
     }
 
     @Override
     public AnswerModel editAnswer(Long answerId, AnswerData data)
     {
-        
+        var Ans = AnswerRep.findById(answerId);
+        if(!Ans.isPresent())
+        {
+            return null;
+        }
+        if(!(Ans.get().getUser().getId() == data.idUser()))
+        {
+            return null;
+        }
+
+        if(data.idQuestion() != null)
+        {
+            Optional<QuestionModel> Question = QuestionRep.findById(data.idQuestion());
+            if(Question.isPresent())
+            {
+                Ans.get().setQuestion(Question.get());
+            }
+        }
+
+        if(data.text() != null)
+        {
+            Ans.get().setText(data.text());
+        }
+
+        return AnswerRep.save(Ans.get());
     }
 }

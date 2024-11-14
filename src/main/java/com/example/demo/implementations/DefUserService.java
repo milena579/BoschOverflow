@@ -6,10 +6,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 
-import com.example.demo.dto.*;
-import com.example.demo.model.*;
+import com.example.demo.dto.UserData;
+import com.example.demo.dto.UserLoginData;
+import com.example.demo.dto.UserQuery;
+import com.example.demo.model.UserModel;
 import com.example.demo.repositories.UserRepository;
-import com.example.demo.services.*;
+import com.example.demo.services.UserService;
 
 public class DefUserService implements UserService
 {
@@ -85,11 +87,11 @@ public class DefUserService implements UserService
     @Override
     public Boolean validateEmail(String email)
     {
-        List<User> users = UserRep.findAll();
+        List<UserModel> users = UserRep.findAll();
 
         int at = email.indexOf("@");
 
-        if (at > 0 && at != email.length-1) {
+        if (at > 0 && at != email.length()-1) {
             for (int i = 0; i < users.size(); i++) {
                 if (users.get(i).email.contentEquals(email)) {
                     return false;
@@ -97,9 +99,8 @@ public class DefUserService implements UserService
                     return true;
                 }
             }
-        } else {
-            return false
         }
+        return false;
     }
 
     @Override
