@@ -4,8 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 
-import com.example.demo.implementations.DefAnswerService;
-import com.example.demo.implementations.DefUserService;
+import com.example.demo.implementations.*;
 import com.example.demo.services.*;
 
 @Configuration
@@ -22,14 +21,14 @@ public class DependencyConfiguration
     @Scope("singleton")
     public QuestionService questionService()
     {
-        return null;
+        return new DefQuestionService();
     }
 
     @Bean
     @Scope("singleton")
     public SpaceService spaceService()
     {
-        return null;
+        return DefSpaceService();
     }
 
     @Bean
@@ -37,5 +36,12 @@ public class DependencyConfiguration
     public AnswerService answerService()
     {
         return new DefAnswerService();
+    }
+
+    @Bean
+    @Scope("singleton")
+    public JwtGenerator jwtGenerator()
+    {
+        return new JwtGenerator();
     }
 }

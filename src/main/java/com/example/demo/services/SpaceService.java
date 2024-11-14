@@ -6,8 +6,6 @@ import com.example.demo.dto.SpaceQuery;
 
 import com.example.demo.model.SpaceModel;
 
-
-
 public interface SpaceService {
     String createSpace();
     String deleteSpace(Long spaceId);

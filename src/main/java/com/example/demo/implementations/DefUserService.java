@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
 import com.example.demo.dto.UserData;
@@ -49,7 +51,10 @@ public class DefUserService implements UserService
     @Override
     public List<UserData> SearchUser(UserQuery query)
     {
-        var Results = UserRep.findAll(Pageable.ofSize(query.size()).withPage(query.page()));
+        UserModel User = new UserModel();
+        User.setName(query.name());
+
+        var Results = UserRep.findAll(Example.of(User),PageRequest.of(query.page(), query.size()));
         List<UserData> Ret = new ArrayList<>();
         Results.get().forEach((item) -> 
         {

@@ -56,6 +56,12 @@ public class DefQuestionService implements QuestionService
     @Override
     public List<QuestionModel> searchQuestion(QuestionQuery query)
     {
+        Optional<SpaceModel> Space = SpaceRep.findById(query.idSpace());
+        if(!Space.isPresent()){return new ArrayList<>();}
+
+        QuestionModel Question = new QuestionModel();
+        Question.setSpace(Space.get());
+
         return QuestionRep.findAll(Pageable.ofSize(query.size()).withPage(query.page())).getContent();
     }
 
