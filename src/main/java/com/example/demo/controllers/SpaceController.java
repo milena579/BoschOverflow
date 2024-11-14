@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.SpaceQuery;
-import com.example.demo.dto.UserData;
-import com.example.demo.dto.UserQuery;
 import com.example.demo.model.SpaceModel;
 import com.example.demo.repositories.SpaceRepository;
 import com.example.demo.services.SpaceService;
@@ -54,8 +52,6 @@ public class SpaceController {
    
     @DeleteMapping
     public ResponseEntity<String> delete(Long id) {
-
-        SpaceModel spc = new SpaceModel();
 
         Optional<SpaceModel> space = spaceRep.findById(id);
         if(!space.isPresent()){return new ResponseEntity<>("Não existe este id", HttpStatus.BAD_REQUEST);}

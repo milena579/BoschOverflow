@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.dto.*;
-import com.example.demo.repositories.*;
 import com.example.demo.services.*;
 
 @RestController
@@ -17,9 +16,6 @@ public class UserController {
     
     @Autowired
     UserService service;
-
-    @Autowired
-    UserRepository userRep;
 
     @PostMapping
     public ResponseEntity<String> create(@RequestBody UserData data) {
