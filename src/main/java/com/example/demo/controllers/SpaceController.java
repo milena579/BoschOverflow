@@ -39,8 +39,7 @@ public class SpaceController {
             }
         }
 
-        service.createSpace(name);
-        return new ResponseEntity<>("Espaço cadastrado!", HttpStatus.OK);
+        return new ResponseEntity<>(service.createSpace(name), HttpStatus.OK);
     }
 
     @GetMapping
@@ -52,6 +51,7 @@ public class SpaceController {
    
     @DeleteMapping
     public ResponseEntity<String> delete(Long id) {
+
         Optional<SpaceModel> space = spaceRep.findById(id);
         if(!space.isPresent()){return new ResponseEntity<>("Não existe este id", HttpStatus.BAD_REQUEST);}
         

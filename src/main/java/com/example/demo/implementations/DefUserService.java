@@ -76,16 +76,11 @@ public class DefUserService implements UserService
 
         for (int i = 0; i < name.length(); i++) {
             if (name.charAt(i) >= 48 && name.charAt(i) <= 57 && name.charAt(i) >= 65 && name.charAt(i) <= 90 && name.charAt(i) >= 97 && name.charAt(i) <= 122 && name.charAt(i) > 127 && name.charAt(i) < 32) {
-                forbidden = false;
+                return false;
             }
         }
-    
-        if (!forbidden) {
-            return true;
-        } else {
-            return false;
-        }
 
+        return true;
     }
 
     @Override
