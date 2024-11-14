@@ -9,8 +9,7 @@ import com.example.demo.model.SpaceModel;
 
 
 public interface SpaceService {
-    String createSpace();
-    String deleteSpace(Long spaceId);
-    List<SpaceModel> searchQuestion(SpaceQuery query);
+    String createSpace(String name);
+    List<SpaceModel> searchSpace(SpaceQuery query);
     String givePermission(Long userId, Long spaceId);
 }

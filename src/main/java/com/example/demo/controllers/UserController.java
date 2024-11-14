@@ -25,15 +25,15 @@ public class UserController {
     public ResponseEntity<String> create(@RequestBody UserData data) {
         if(!service.validateEmail(data.email()))
         {
-            return new ResponseEntity<>("Email inválido", HttpStatus.OK);
+            return new ResponseEntity<>("Email inválido", HttpStatus.BAD_REQUEST);
         }
         if (!service.validateName(data.name()))
         {
-            return new ResponseEntity<>("Nome inválido", HttpStatus.OK);
+            return new ResponseEntity<>("Nome inválido", HttpStatus.BAD_REQUEST);
         }
         if(!service.validatePassword(data.password()))
         {
-            return new ResponseEntity<>("Senha deve ter no minímo 12 caracteres, letra maiuscula, letra minuscula e número", HttpStatus.OK);
+            return new ResponseEntity<>("Senha deve ter no minímo 12 caracteres, letra maiuscula, letra minuscula e número", HttpStatus.BAD_REQUEST);
         }
         service.Register(data);
         return new ResponseEntity<>("Usuário cadastrado", HttpStatus.OK);
