@@ -91,14 +91,16 @@ public class DefUserService implements UserService
 
         int at = email.indexOf("@");
 
-        if (at > 0 && at != email.length()-1) {
-            for (int i = 0; i < users.size(); i++) {
-                if (users.get(i).email.contentEquals(email)) {
+        if (at > 0 && at != email.length()-1)
+        {
+            for (int i = 0; i < users.size(); i++)
+            {
+                if (users.get(i).email.contentEquals(email))
+                {
                     return false;
-                } else {
-                    return true;
                 }
             }
+            return true;
         }
         return false;
     }
