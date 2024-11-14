@@ -5,7 +5,7 @@ package com.example.demo.controllers;
 public class UserController {
     
     @Autowired
-    DefUserService service;
+    UserService service;
 
     @Autowired
     UserRepository userRep;
@@ -27,7 +27,9 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<String> getUser(int page, int size, String edv) {
-        userRep.findByName()
+    public ResponseEntity<List<UserData>> getUser(int page, int size, String name) {
+        UserQuery queryUser = new UserQuery(name, page, size);
+
+        return service.searchUser(queryUser);
     }
 }
