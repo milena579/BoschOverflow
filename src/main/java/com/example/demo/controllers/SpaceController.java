@@ -39,8 +39,7 @@ public class SpaceController {
             }
         }
 
-        service.createSpace(name);
-        return new ResponseEntity<>("Espaço cadastrado!", HttpStatus.OK);
+        return new ResponseEntity<>(service.createSpace(name), HttpStatus.OK);
     }
 
     @GetMapping
