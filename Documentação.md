@@ -45,4 +45,6 @@ Json com edv e senha do usuário
 
 ### Retorno:
 
-String com o 
+String com o Jwt de autenticação em caso de sucesso.
+
+Caso falhe, retorna a mensagem de erro.
