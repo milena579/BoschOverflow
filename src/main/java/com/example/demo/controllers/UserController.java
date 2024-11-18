@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.dto.*;
+import com.example.demo.implementations.PassEncoder;
+import com.example.demo.repositories.UserRepository;
 import com.example.demo.services.*;
 
 @RestController
@@ -16,6 +18,15 @@ public class UserController {
     
     @Autowired
     UserService service;
+
+    @Autowired
+    UserRepository repo;
+
+    @Autowired
+    PassEncoder encoder;
+
+    @Autowired
+    JWTService<Token> jwtService;
 
     @PostMapping
     public ResponseEntity<String> create(@RequestBody UserData data) {
@@ -31,6 +42,7 @@ public class UserController {
         {
             return new ResponseEntity<>("Senha deve ter no minímo 12 caracteres, letra maiuscula, letra minuscula e número", HttpStatus.BAD_REQUEST);
         }
+
         service.Register(data);
         return new ResponseEntity<>("Usuário cadastrado", HttpStatus.OK);
     }
@@ -40,5 +52,30 @@ public class UserController {
         UserQuery queryUser = new UserQuery(name, page, size);
 
         return new ResponseEntity<>(service.SearchUser(queryUser), HttpStatus.OK);
+    }
+
+    @PostMapping 
+    public ResponseEntity<String> login(@RequestBody UserLoginData user) {
+
+        if (user.edv() == null && user.password() == null) {
+            return new ResponseEntity<>("edv and password are expected", HttpStatus.BAD_REQUEST);
+        }
+        var users = repo.findByEdv(user.edv());
+
+        if (users.isEmpty()) {
+            return new ResponseEntity<>("The user not exists", HttpStatus.UNAUTHORIZED);
+        }
+
+        var currentUser = users.get(0);
+
+        if(!encoder.matches(user.password(), currentUser.getPassword())) {
+            return new ResponseEntity<>("The password is incorret", HttpStatus.UNAUTHORIZED);
+        }
+
+        Token token = new Token(currentUser.getId());
+
+        var jwt = jwtService.get(token);
+
+        return new ResponseEntity<>(jwt, HttpStatus.OK);
     }
 }

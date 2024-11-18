@@ -18,6 +18,9 @@ public class DefUserService implements UserService
 {
     @Autowired
     UserRepository UserRep;
+    
+    @Autowired
+    PassEncoder encoder;
 
     @Override
     public UserModel Login(UserLoginData data)
@@ -42,7 +45,7 @@ public class DefUserService implements UserService
         Usr.setEdv(data.edv());
         Usr.setName(data.name());
         Usr.setEmail(data.email());
-        Usr.setPassword(data.password());
+        Usr.setPassword(encoder.encode(data.password()));
         UserRep.save(Usr);
         return "OK";
     }
