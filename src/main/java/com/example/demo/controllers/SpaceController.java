@@ -35,7 +35,7 @@ public class SpaceController {
 
         for (SpaceModel currenteSpace : spaces) {
             if (currenteSpace.getName().contentEquals(name)) {
-                return new ResponseEntity<>("Nome da sala já existe!", HttpStatus.BAD_REQUEST);
+                return new ResponseEntity<>("this name already exists!", HttpStatus.BAD_REQUEST);
             }
         }
 
@@ -53,10 +53,10 @@ public class SpaceController {
     public ResponseEntity<String> delete(Long id) {
 
         Optional<SpaceModel> space = spaceRep.findById(id);
-        if(!space.isPresent()){return new ResponseEntity<>("Não existe este id", HttpStatus.BAD_REQUEST);}
+        if(!space.isPresent()){return new ResponseEntity<>("id doesnt exists", HttpStatus.BAD_REQUEST);}
         
         spaceRep.deleteById(id);
 
-        return new ResponseEntity<>("Espaço deletado!", HttpStatus.OK);
+        return new ResponseEntity<>("Space deleted!", HttpStatus.OK);
     }
 }

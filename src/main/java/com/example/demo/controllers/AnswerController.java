@@ -22,9 +22,9 @@ public class AnswerController {
         AnswerModel user = service.createAnswer(data);
 
         if (user == null) {
-            return new ResponseEntity<>("Não existe User ou pergunta!", HttpStatus.OK);
+            return new ResponseEntity<>("User or question doesnt exists!", HttpStatus.OK);
         }
 
-        return new ResponseEntity<>("Resposta cadastrada!", HttpStatus.OK);
+        return new ResponseEntity<>("Answer registered!", HttpStatus.OK);
     }
 }
