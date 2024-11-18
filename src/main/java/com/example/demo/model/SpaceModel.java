@@ -21,11 +21,11 @@ public class SpaceModel {
     @Column
     private String name;
     
-    @OneToMany(mappedBy = "space")
+    @OneToMany(mappedBy = "space", orphanRemoval = true)
     private List<PermissionModel> Permissions;
     
     
-    @OneToMany(mappedBy = "space")
+    @OneToMany(mappedBy = "space", orphanRemoval = true)
     private List<QuestionModel> Questions;
     
     

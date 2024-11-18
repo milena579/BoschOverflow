@@ -1,5 +1,6 @@
 package com.example.demo.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -54,17 +55,18 @@ public class QuestionController
                 }
             }else
             {
-                if(size == null)
-                {
-                    return GetByID(Long.parseLong(space));
-                }else
-                {
-                    Questions = QuestionServ.searchQuestion(new QuestionQuery(Result.get(0).getId(), 0, 0x7fffffff));
-                }
+                Questions = QuestionServ.searchQuestion(new QuestionQuery(Result.get(0).getId(), 0, 0x7fffffff));
             }
-            return new ResponseEntity<>(Questions, HttpStatus.OK);
+
+            List<QuestionData> Res = new ArrayList<>();
+            for (QuestionModel ques : Questions) {
+                
+                Res.add(new QuestionData(ques.getTitle(), ques.getText(), ques.getUser().getId(), ques.getSpace().getId()));
+            }
+
+            return new ResponseEntity<>(Res, HttpStatus.OK);
         }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return GetByID(Long.parseLong(space));
     }
 
     public ResponseEntity<Object> GetByID(@PathVariable Long id)
@@ -73,7 +75,8 @@ public class QuestionController
 
         if(Question.isPresent())
         {
-            return new ResponseEntity<>(Question.get(), HttpStatus.OK);
+            QuestionData dataQues = new QuestionData(Question.get().getTitle(), Question.get().getText(), Question.get().getUser().getId(), Question.get().getSpace().getId());
+            return new ResponseEntity<>(dataQues, HttpStatus.OK);
         }else
         {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);

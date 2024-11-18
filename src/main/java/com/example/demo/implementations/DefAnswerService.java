@@ -35,6 +35,7 @@ public class DefAnswerService implements AnswerService
         {
             if(permission.getSpace().getId().compareTo(Question.get().getSpace().getId()) == 0)
             {
+                Ans.setUser(User.get());
                 return AnswerRep.save(Ans);
             }
         }

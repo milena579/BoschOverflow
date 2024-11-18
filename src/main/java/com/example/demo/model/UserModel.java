@@ -30,13 +30,13 @@ public class UserModel {
     @Column
     public String password;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", orphanRemoval = true)
     private List<PermissionModel> Permissions;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", orphanRemoval = true)
     private List<QuestionModel> Questions;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", orphanRemoval = true)
     private List<AnswerModel> Answer;
 
     public Long getId() {
