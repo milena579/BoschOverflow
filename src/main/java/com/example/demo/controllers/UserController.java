@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.dto.*;
+import com.example.demo.implementations.JwtGenerator;
 import com.example.demo.implementations.PassEncoder;
 import com.example.demo.repositories.UserRepository;
 import com.example.demo.services.*;
@@ -26,7 +27,7 @@ public class UserController {
     PassEncoder encoder;
 
     @Autowired
-    JWTService<Token> jwtService;
+    JwtGenerator jwtService;
 
     @PostMapping
     public ResponseEntity<String> create(@RequestBody UserData data) {
@@ -48,34 +49,17 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<List<UserData>> getUser(int page, int size, String name) {
+    public ResponseEntity<List<UserData>> getUser(Integer page, Integer size, String name) {
+        if(page == null)
+        {
+            page = 0;
+        }
+        if(size == null)
+        {
+            size = 0x7fffffff;
+        }
         UserQuery queryUser = new UserQuery(name, page, size);
 
         return new ResponseEntity<>(service.SearchUser(queryUser), HttpStatus.OK);
-    }
-
-    @PostMapping 
-    public ResponseEntity<String> login(@RequestBody UserLoginData user) {
-
-        if (user.edv() == null && user.password() == null) {
-            return new ResponseEntity<>("edv and password are expected", HttpStatus.BAD_REQUEST);
-        }
-        var users = repo.findByEdv(user.edv());
-
-        if (users.isEmpty()) {
-            return new ResponseEntity<>("The user not exists", HttpStatus.UNAUTHORIZED);
-        }
-
-        var currentUser = users.get(0);
-
-        if(!encoder.matches(user.password(), currentUser.getPassword())) {
-            return new ResponseEntity<>("The password is incorret", HttpStatus.UNAUTHORIZED);
-        }
-
-        Token token = new Token(currentUser.getId());
-
-        var jwt = jwtService.get(token);
-
-        return new ResponseEntity<>(jwt, HttpStatus.OK);
     }
 }

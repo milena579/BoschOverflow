@@ -44,4 +44,11 @@ public class DependencyConfiguration
     {
         return new JwtGenerator();
     }
+
+    @Bean
+    @Scope("singleton")
+    public PassEncoder passEncoder()
+    {
+        return new PassEncoder();
+    }
 }

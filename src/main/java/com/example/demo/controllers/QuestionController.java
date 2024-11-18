@@ -37,27 +37,37 @@ public class QuestionController
     UserRepository UserRep;
 
     @GetMapping("/{space}")
-    public ResponseEntity<List<QuestionModel>> GetBySpace(@PathVariable String Space, Integer page, Integer size)
+    public ResponseEntity<Object> GetBySpace(@PathVariable String space, Integer page, Integer size)
     {
-        List<SpaceModel> Result = SpaceRep.findByName(Space);
-        List<QuestionModel> Questions;
-        if(page != null)
+        List<SpaceModel> Result = SpaceRep.findByName(space);
+        if(Result.size() != 0)
         {
-            if(size == null)
+            List<QuestionModel> Questions;
+            if(page != null)
             {
-                Questions = QuestionServ.searchQuestion(new QuestionQuery(Result.get(0).getId(), page, 10));
+                if(size == null)
+                {
+                    Questions = QuestionServ.searchQuestion(new QuestionQuery(Result.get(0).getId(), page, 10));
+                }else
+                {
+                    Questions = QuestionServ.searchQuestion(new QuestionQuery(Result.get(0).getId(), page, size));
+                }
+            }else
+            {
+                if(size == null)
+                {
+                    return GetByID(Long.parseLong(space));
+                }else
+                {
+                    Questions = QuestionServ.searchQuestion(new QuestionQuery(Result.get(0).getId(), 0, 0x7fffffff));
+                }
             }
-            Questions = QuestionServ.searchQuestion(new QuestionQuery(Result.get(0).getId(), page, size));
-        }else
-        {
-            Questions = QuestionServ.searchQuestion(new QuestionQuery(Result.get(0).getId(), 0, 0x7fffffff));
+            return new ResponseEntity<>(Questions, HttpStatus.OK);
         }
-
-        return new ResponseEntity<>(Questions, HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<QuestionModel> GetByID(@PathVariable Long id)
+    public ResponseEntity<Object> GetByID(@PathVariable Long id)
     {
         Optional<QuestionModel> Question = QuestionRep.findById(id);
 
