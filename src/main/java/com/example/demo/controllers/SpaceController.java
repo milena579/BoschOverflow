@@ -32,7 +32,7 @@ public class SpaceController {
     public ResponseEntity<String> create(@RequestBody String name) {
         
         List<SpaceModel> spaces = spaceRep.findAll();
-        
+
         for (SpaceModel currenteSpace : spaces) {
             if (currenteSpace.getName().contentEquals(name)) {
                 return new ResponseEntity<>("this name already exists!", HttpStatus.BAD_REQUEST);
