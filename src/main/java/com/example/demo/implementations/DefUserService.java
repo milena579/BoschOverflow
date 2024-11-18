@@ -72,8 +72,6 @@ public class DefUserService implements UserService
     @Override
     public Boolean validateName(String name)
     {
-        Boolean forbidden = true;
-
         for (int i = 0; i < name.length(); i++) {
             if (name.charAt(i) >= 48 && name.charAt(i) <= 57 && name.charAt(i) >= 65 && name.charAt(i) <= 90 && name.charAt(i) >= 97 && name.charAt(i) <= 122 && name.charAt(i) > 127 && name.charAt(i) < 32) {
                 return false;

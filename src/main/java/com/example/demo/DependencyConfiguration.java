@@ -28,7 +28,7 @@ public class DependencyConfiguration
     @Scope("singleton")
     public SpaceService spaceService()
     {
-        return DefSpaceService();
+        return new DefSpaceService();
     }
 
     @Bean

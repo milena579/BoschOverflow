@@ -7,7 +7,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 
-import com.example.demo.dto.PermissionData;
 import com.example.demo.dto.SpaceQuery;
 import com.example.demo.model.PermissionModel;
 import com.example.demo.model.SpaceModel;
