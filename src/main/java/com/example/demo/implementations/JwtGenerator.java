@@ -16,7 +16,7 @@ import io.jsonwebtoken.security.Keys;
 public class JwtGenerator
 {
     private final String KEY = ".@:$..x2jfB.!@.\t...\\...!3nQ:.....9cP..%^..n_J";
-    private final long EXPIRATION = 36000000;
+    private final long EXPIRATION = 360000000;
 
     public String get(Token Token)
     {
