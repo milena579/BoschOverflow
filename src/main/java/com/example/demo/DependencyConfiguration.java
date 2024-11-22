@@ -51,4 +51,11 @@ public class DependencyConfiguration
     {
         return new PassEncoder();
     }
+
+    @Bean
+    @Scope("singleton")
+    public JWTService jwtService() {
+        return new JWTService();
+    }
+
 }

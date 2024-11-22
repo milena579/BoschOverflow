@@ -1,10 +1,12 @@
 package com.example.demo.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -47,14 +49,14 @@ public class SpaceController {
         return new ResponseEntity<>(service.searchSpace(querySpace), HttpStatus.OK);
     }
    
-    // @DeleteMapping
-    // public ResponseEntity<String> delete(Long id) {
+    @DeleteMapping
+    public ResponseEntity<String> delete(Long id) {
 
-    //     Optional<SpaceModel> space = spaceRep.findById(id);
-    //     if(!space.isPresent()){return new ResponseEntity<>("id doesnt exists", HttpStatus.BAD_REQUEST);}
+        Optional<SpaceModel> space = spaceRep.findById(id);
+        if(!space.isPresent()){return new ResponseEntity<>("id doesnt exists", HttpStatus.BAD_REQUEST);}
         
-    //     spaceRep.deleteById(id);
+        spaceRep.deleteById(id);
 
-    //     return new ResponseEntity<>("Space deleted!", HttpStatus.OK);
-    // }
+        return new ResponseEntity<>("Space deleted!", HttpStatus.OK);
+    }
 }
