@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 
+import com.example.demo.dto.Token;
 import com.example.demo.implementations.*;
 import com.example.demo.services.*;
 
@@ -53,9 +54,8 @@ public class DependencyConfiguration
     }
 
     @Bean
-    @Scope("singleton")
-    public JWTService jwtService() {
-        return new JWTService();
+    public JWTService<Token> jwtService() {
+        return new JwtGenerator();
     }
 
 }

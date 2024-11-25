@@ -8,12 +8,13 @@ import java.util.Map;
 import javax.crypto.SecretKey;
 
 import com.example.demo.dto.Token;
+import com.example.demo.services.JWTService;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 
-public class JwtGenerator
+public class JwtGenerator implements JWTService<Token>
 {
     private final String KEY = ".@:$..x2jfB.!@.\t...\\...!3nQ:.....9cP..%^..n_J";
     private final long EXPIRATION = 360000000;

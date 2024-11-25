@@ -37,6 +37,9 @@ public class DefSpaceService implements SpaceService {
     @Override
     public List<SpaceModel> searchSpace(SpaceQuery query) {
         var Results = spaceRep.findAll(Pageable.ofSize(query.size()).withPage(query.page())).getContent();
+        
+        System.out.println(Results);
+
         List<SpaceModel> Ret = new ArrayList<>();
         
         if (Results == null) {
