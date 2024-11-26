@@ -5,8 +5,10 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.PageRequest;
 
+import com.example.demo.dto.SpaceDTO;
 import com.example.demo.dto.SpaceQuery;
 import com.example.demo.model.PermissionModel;
 import com.example.demo.model.SpaceModel;
@@ -35,18 +37,26 @@ public class DefSpaceService implements SpaceService {
     }
 
     @Override
-    public List<SpaceModel> searchSpace(SpaceQuery query) {
-        var Results = spaceRep.findAll(Pageable.ofSize(query.size()).withPage(query.page())).getContent();
-        
-        System.out.println(Results);
+    public List<SpaceDTO> searchSpace(SpaceQuery query) {
 
-        List<SpaceModel> Ret = new ArrayList<>();
+        SpaceModel space = new SpaceModel();
+        space.setName(query.name());
         
-        if (Results == null) {
-            return Ret;
-        } else {
-            return Results;
-        }
+        var Results = spaceRep.findAll(Example.of(space),PageRequest.of(query.page(), query.size()));
+        List<SpaceDTO> Ret = new ArrayList<>();
+        
+        Results.get().forEach((item) -> 
+        {
+            SpaceDTO Data = new SpaceDTO
+            (            
+                item.getId(),
+                item.getName()
+                
+            );
+            Ret.add(Data);
+        });
+
+        return Ret;
     }
 
     @Override

@@ -51,6 +51,7 @@ public class UserController {
         {
             size = 0x7fffffff;
         }
+        
         UserQuery queryUser = new UserQuery(name, page, size);
 
         return new ResponseEntity<>(service.SearchUser(queryUser), HttpStatus.OK);

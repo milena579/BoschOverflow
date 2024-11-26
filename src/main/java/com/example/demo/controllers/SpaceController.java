@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.dto.SpaceDTO;
 import com.example.demo.dto.SpaceQuery;
 import com.example.demo.model.SpaceModel;
 import com.example.demo.repositories.SpaceRepository;
@@ -43,14 +44,14 @@ public class SpaceController {
     }
 
     @GetMapping
-    public ResponseEntity<List<SpaceModel>> getSpace(int page, int size, String name) {
+    public ResponseEntity<List<SpaceDTO>> getSpace(int page, int size, String name) {
         SpaceQuery querySpace = new SpaceQuery(name, page, size);
 
         return new ResponseEntity<>(service.searchSpace(querySpace), HttpStatus.OK);
     }
    
     @DeleteMapping
-    public ResponseEntity<String> delete(Long id) {
+    public ResponseEntity<String> delete(@RequestBody Long id) {
 
         Optional<SpaceModel> space = spaceRep.findById(id);
         if(!space.isPresent()){return new ResponseEntity<>("id doesnt exists", HttpStatus.BAD_REQUEST);}
